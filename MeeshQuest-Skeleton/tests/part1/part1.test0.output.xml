@@ -1,2 +1,38 @@
+coordinate
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-
+<results>
+  <success>
+    <command name="createCity"/>
+    <parameters>
+      <name value="Baltimore"/>
+      <x value="76"/>
+      <y value="39"/>
+      <radius value="5"/>
+      <color value="black"/>
+    </parameters>
+    <output/>
+  </success>
+  <success>
+    <command name="createCity"/>
+    <parameters>
+      <name value="Chicago"/>
+      <x value="81"/>
+      <y value="47"/>
+      <radius value="5"/>
+      <color value="black"/>
+    </parameters>
+    <output/>
+  </success>
+  <success>
+    <command name="listCities"/>
+    <parameters>
+      <sortBy value="coordinate"/>
+    </parameters>
+    <output>
+      <cityList>
+        <city color="black" name="Baltimore" radius="5" x="76" y="39"/>
+        <city color="black" name="Chicago" radius="5" x="81" y="47"/>
+      </cityList>
+    </output>
+  </success>
+</results>

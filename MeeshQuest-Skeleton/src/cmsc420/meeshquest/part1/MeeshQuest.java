@@ -14,7 +14,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import cmsc420.xml.XmlUtility;
-
 /**
  * A skeletal version of the MeeshQuest program. This does the following: (1)
  * opens the input/output files; (2) validates and parses the xml input; (3)
@@ -25,18 +24,30 @@ public class MeeshQuest {
 
 // --------------------------------------------------------------------------------------------
 //  Uncomment these to read from standard input and output (USE THESE FOR YOUR FINAL SUBMISSION)
-//	private static final boolean USE_STD_IO = true; 
-//	private static String inputFileName = "";
-//	private static String outputFileName = "";
+	private static final boolean USE_STD_IO = true; 
+	private static String inputFileName = "";
+	private static String outputFileName = "";
 // --------------------------------------------------------------------------------------------
 //  Uncomment these to read from a file (USE THESE FOR YOUR TESTING ONLY)
-	private static final boolean USE_STD_IO = false;
+	/*private static final boolean USE_STD_IO = false;
 	private static String inputFileName = "tests/part1/part1.test0.input.xml";
-	private static String outputFileName = "tests/part1/part1.test0.output.xml";
+	private static String outputFileName = "tests/part1/part1.test0.output.xml";*/
 // --------------------------------------------------------------------------------------------
 
-	public static void main(String[] args) {
 
+	
+/*	private void processCMD(Element cmd) {
+		String name = cmd.getNodeName();
+		if (name.equals("createCity")) {
+			Commands.pcreatecity(cmd);
+		}
+		else if (name.equals("listCities")) {
+			Commands.plistcities(cmd);
+		}
+	}*/
+	private final static Commands commands = new Commands();
+	public static void main(String[] args) {
+		
 		// configure to read from file rather than standard input/output
 		if (!USE_STD_IO) {
 			try {
@@ -55,6 +66,8 @@ public class MeeshQuest {
 			Document input = XmlUtility.validateNoNamespace(System.in);
 			// general XML document for results
 			results = XmlUtility.getDocumentBuilder().newDocument();
+			
+			commands.setResults(results);
 			// get input document root node
 			Element rootNode = input.getDocumentElement();
 			// get list of all nodes in document
@@ -65,10 +78,19 @@ public class MeeshQuest {
 				if (nl.item(i).getNodeType() == Document.ELEMENT_NODE) {
 					// get next command to process
 					Element command = (Element) nl.item(i); // (ignore warning - just a skeleton)
-
+					
 					// ---------------------------------------
 					// TODO: Add your command processing here
 					// ---------------------------------------
+					
+					String name = command.getNodeName();
+					if (name.equals("createCity")) {
+						commands.pcreatecity(command);
+					}
+					else if (name.equals("listCities")) {
+						commands.plistcities(command);
+					}
+					
 				}
 			}
 		} catch (SAXException | IOException | ParserConfigurationException e) {
@@ -86,4 +108,9 @@ public class MeeshQuest {
 			}
 		}
 	}
+	
+	
+	
+	
+
 }
